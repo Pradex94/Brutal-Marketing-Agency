@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ── */
+:root {
+  --neon: #2ff801;
+  --acid: #eaea00;
+  --black: #000000;
+  --light: #f6f6f6;
+}
+
+/* ── Base Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--light);
+  color: var(--black);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--light); }
+::-webkit-scrollbar-thumb { background: #000; }
+
+/* ── Grid Blueprint Background ── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.grid-bg-dark {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Marquee Track ── */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+}
+
+/* ── Brutal Input ── */
+.brutal-input {
+  width: 100%;
+  border: 3px solid #000;
+  background: #fff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  outline: none;
+  letter-spacing: 0.04em;
+  border-radius: 0;
+  transition: box-shadow 0.18s ease;
+  appearance: none;
+}
+
+.brutal-input:focus {
+  box-shadow: 4px 4px 0 #000;
+}
+
+.brutal-input::placeholder {
+  color: #888;
+  font-size: 0.75rem;
+}
+
+textarea.brutal-input {
+  resize: none;
+}
+
+/* ── Triangle Decoration ── */
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 28px solid transparent;
+  border-right: 28px solid transparent;
+  border-bottom: 48px solid var(--acid);
+}
+
+/* ── Nav link active underline ── */
+.nav-link-active {
+  position: relative;
+}
+
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--neon);
+}
+
+/* ── Button press effect ── */
+.btn-press:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000 !important;
+}
+
+/* ── Port image transition ── */
+.port-img {
+  filter: grayscale(100%);
+  transition: filter 0.4s ease, transform 0.4s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.port-card:hover .port-img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.port-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 60%);
+}
+
+/* ── Star spin ── */
+.star-spin {
+  display: inline-block;
+  animation: spin-slow 12s linear infinite;
+}
+
+/* ── Form success animation ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-success {
+  animation: fadeIn 0.4s ease forwards;
+}
