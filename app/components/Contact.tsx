@@ -1,148 +1,151 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
-import { Mail } from 'lucide-react'
-
-interface FormState {
-  name: string
-  email: string
-  message: string
-}
+import { motion } from 'framer-motion'
+import { Send, MapPin, Mail } from 'lucide-react'
 
 export default function Contact() {
-  const [form, setForm] = useState<FormState>({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle')
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
   }
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    setStatus('sending')
-    setTimeout(() => {
-      setStatus('success')
-      setForm({ name: '', email: '', message: '' })
-    }, 900)
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut" as any,
+      },
+    },
   }
 
   return (
-    <section
-      id="contact"
-      className="py-24 px-6 border-b-4 border-black relative overflow-hidden"
-      style={{ background: 'var(--acid)' }}
-    >
-      {/* Grid bg overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(0,0,0,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.12) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-          opacity: 0.15,
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Floating Mail Icon */}
-      <a
-        href="mailto:hello@brutal.agency"
-        className="mail-float absolute top-8 right-8 md:top-10 md:right-12 z-20 w-14 h-14 bg-black border-4 border-black shadow-brutal flex items-center justify-center hover:rotate-[-8deg] hover:scale-110 transition-transform duration-200"
-        aria-label="Send email to BRUTAL.AGENCY"
-      >
-        <Mail size={24} stroke="#2ff801" strokeWidth={2.5} />
-      </a>
-
-      <div className="max-w-3xl mx-auto relative z-10">
-        {/* Label */}
-        <p className="font-mono text-xs uppercase tracking-widest opacity-60 mb-4">
-          // 004 — CONTACT
-        </p>
-
-        {/* Heading */}
-        <h2
-          className="font-grotesk font-bold uppercase leading-none mb-12"
-          style={{ fontSize: 'clamp(2.5rem, 7vw, 6rem)', letterSpacing: '-0.02em', lineHeight: '0.9' }}
+    <section id="contact" className="py-32 px-6 bg-white border-b-6 border-black overflow-hidden relative">
+      {/* Decorative Accent */}
+      <div className="absolute top-0 left-0 w-full h-2 bg-neon opacity-20" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid lg:grid-cols-12 gap-20"
         >
-          READY TO
-          <br />
-          GET LOUD?
-        </h2>
+          {/* ── Left Column: Copy ── */}
+          <div className="lg:col-span-5">
+            <motion.div variants={itemVariants}>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] mb-6 text-black/40">
+                // ACQUISITION / INTAKE
+              </p>
+              <h2
+                className="font-grotesk font-black uppercase leading-[0.9] mb-10"
+                style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', letterSpacing: '-0.04em' }}
+              >
+                READY TO <br />
+                <span className="text-neon bg-black px-4 inline-block transform rotate-1">DOMINATE?</span>
+              </h2>
+              <p className="font-work text-lg text-black/70 mb-12 max-w-sm">
+                WE ONLY WORK WITH CLIENTS WHO ARE READY FOR RADICAL GROWTH. 
+                IF YOU'RE LOOKING FOR "SAFE", LOOK ELSEWHERE.
+              </p>
+            </motion.div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
-          <div className="grid md:grid-cols-2 gap-5">
-            <div>
-              <label htmlFor="name" className="font-mono text-xs uppercase tracking-widest opacity-60 block mb-2">
-                YOUR NAME
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="JOHN DOE"
-                required
-                value={form.name}
-                onChange={handleChange}
-                className="brutal-input"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="font-mono text-xs uppercase tracking-widest opacity-60 block mb-2">
-                YOUR EMAIL
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="YOU@COMPANY.COM"
-                required
-                value={form.email}
-                onChange={handleChange}
-                className="brutal-input"
-              />
-            </div>
+            {/* Contact Info */}
+            <motion.div variants={itemVariants} className="space-y-8 pt-12 border-t-2 border-black/5">
+              <div className="flex items-center gap-6 group cursor-pointer">
+                <div className="w-12 h-12 flex items-center justify-center border-2 border-black group-hover:bg-neon transition-colors">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <p className="font-mono text-[9px] uppercase tracking-widest text-black/40">EMAIL AGENT</p>
+                  <p className="font-grotesk font-bold text-xl uppercase">HELLO@BRUTAL.AGENCY</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-6 group cursor-pointer">
+                <div className="w-12 h-12 flex items-center justify-center border-2 border-black group-hover:bg-neon transition-colors">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <p className="font-mono text-[9px] uppercase tracking-widest text-black/40">HQ LOCATION</p>
+                  <p className="font-grotesk font-bold text-xl uppercase">NEW YORK // REMOTE</p>
+                </div>
+              </div>
+            </motion.div>
           </div>
 
-          <div>
-            <label htmlFor="message" className="font-mono text-xs uppercase tracking-widest opacity-60 block mb-2">
-              WHAT DO YOU NEED?
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              placeholder="TELL US ABOUT YOUR PROJECT..."
-              required
-              value={form.message}
-              onChange={handleChange}
-              className="brutal-input"
-            />
-          </div>
+          {/* ── Right Column: Form ── */}
+          <motion.div variants={itemVariants} className="lg:col-span-7 bg-light border-4 border-black p-8 md:p-12 shadow-brutal hover:shadow-brutal-lg transition-all duration-500">
+            <form className="space-y-10" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid md:grid-cols-2 gap-10">
+                <div className="space-y-3">
+                  <label className="font-mono text-[10px] font-black uppercase tracking-widest text-black/40 block ml-1">
+                    01. YOUR IDENTITY
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="NAME / ALIAS"
+                    className="brutal-input w-full"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <label className="font-mono text-[10px] font-black uppercase tracking-widest text-black/40 block ml-1">
+                    02. SECURE EMAIL
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="EMAIL@DOMAIN.COM"
+                    className="brutal-input w-full"
+                  />
+                </div>
+              </div>
 
-          <button
-            type="submit"
-            disabled={status !== 'idle'}
-            className={`btn-press w-full font-grotesk font-bold uppercase text-sm py-5 border-4 border-black shadow-brutal-lg hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-xl transition-all duration-200 ${
-              status === 'success'
-                ? 'bg-black text-neon'
-                : 'bg-black text-white hover:bg-neon hover:text-black'
-            }`}
-            style={{ letterSpacing: '0.15em', cursor: status !== 'idle' ? 'not-allowed' : 'pointer' }}
-          >
-            {status === 'idle' && 'SUBMIT REQUEST →'}
-            {status === 'sending' && 'SENDING...'}
-            {status === 'success' && '✓ MESSAGE RECEIVED'}
-          </button>
-        </form>
+              <div className="space-y-3">
+                <label className="font-mono text-[10px] font-black uppercase tracking-widest text-black/40 block ml-1">
+                  03. OBJECTIVE
+                </label>
+                <div className="relative">
+                  <select className="brutal-input w-full appearance-none bg-white pr-10">
+                    <option>BRAND IDENTITY REDESIGN</option>
+                    <option>AGGRESSIVE GROWTH CAMPAIGN</option>
+                    <option>FULL CONTENT OVERHAUL</option>
+                    <option>SOMETHING ELSE</option>
+                  </select>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-black/20 font-mono text-[10px]">
+                    SELECT_
+                  </div>
+                </div>
+              </div>
 
-        {status === 'success' && (
-          <p className="form-success mt-4 font-mono text-xs uppercase tracking-widest font-bold text-black text-center">
-            WE&apos;LL MAKE SOME NOISE TOGETHER SOON.
-          </p>
-        )}
+              <div className="space-y-3">
+                <label className="font-mono text-[10px] font-black uppercase tracking-widest text-black/40 block ml-1">
+                  04. INTEL / MESSAGE
+                </label>
+                <textarea
+                  placeholder="WHAT ARE WE BUILDING?"
+                  rows={4}
+                  className="brutal-input w-full resize-none"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="group w-full py-6 bg-black text-white border-4 border-black font-grotesk font-black text-xl uppercase tracking-widest flex items-center justify-center gap-4 hover:bg-neon hover:text-black transition-all duration-300"
+              >
+                INITIATE CONTACT
+                <Send size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </button>
+            </form>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   )

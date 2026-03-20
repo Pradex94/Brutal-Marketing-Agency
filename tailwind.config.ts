@@ -11,8 +11,10 @@ const config: Config = {
       colors: {
         neon: '#2ff801',
         acid: '#eaea00',
-        brutal: '#000000',
-        light: '#f6f6f6',
+        brutal: '#050505',
+        light: '#f8f8f8',
+        'soft-gray': '#e5e5e5',
+        'deep-gray': '#1a1a1a',
       },
       fontFamily: {
         grotesk: ['var(--font-space-grotesk)', 'sans-serif'],
@@ -20,11 +22,22 @@ const config: Config = {
         mono: ['var(--font-space-mono)', 'monospace'],
       },
       boxShadow: {
-        brutal: '4px 4px 0 #000',
-        'brutal-lg': '6px 6px 0 #000',
+        brutal: '4px 4px 0 #050505',
+        'brutal-lg': '8px 8px 0 #050505',
         'brutal-white': '4px 4px 0 #fff',
         'brutal-neon': '4px 4px 0 #2ff801',
-        'brutal-xl': '8px 8px 0 #000',
+        'brutal-acid': '4px 4px 0 #eaea00',
+        'brutal-hover': '2px 2px 0 #050505',
+        'brutal-xl': '12px 12px 0 #050505',
+      },
+      borderWidth: {
+        '3': '3px',
+        '5': '5px',
+        '6': '6px',
+      },
+      letterSpacing: {
+        tightest: '-0.04em',
+        widestest: '0.2em',
       },
       keyframes: {
         marquee: {
@@ -37,8 +50,8 @@ const config: Config = {
         },
       },
       animation: {
-        marquee: 'marquee 22s linear infinite',
-        'spin-slow': 'spin-slow 12s linear infinite',
+        marquee: 'marquee 30s linear infinite',
+        'spin-slow': 'spin-slow 20s linear infinite',
       },
     },
   },

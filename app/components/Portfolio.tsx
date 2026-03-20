@@ -1,6 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { ArrowUpRight, Archive } from 'lucide-react'
 
 interface Project {
   id: string
@@ -88,100 +90,159 @@ const projects: Project[] = [
 ]
 
 export default function Portfolio() {
-  return (
-    <section id="work" className="py-24 px-6 bg-black border-b-4 border-white">
-      <div className="max-w-7xl mx-auto">
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  }
 
+  const projectVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut" as any,
+      },
+    },
+  }
+
+  return (
+    <section id="work" className="py-32 px-6 bg-brutal border-b-6 border-white overflow-hidden">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex items-end justify-between mb-12">
-          <div>
-            <p
-              className="font-mono text-xs uppercase tracking-widest mb-4"
-              style={{ color: '#2ff801', opacity: 0.7 }}
-            >
-              // 002 — PORTFOLIO
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] mb-6 text-neon opacity-70">
+              // SELECTED CASE STUDIES
             </p>
             <h2
-              className="font-grotesk font-bold uppercase text-white leading-none"
-              style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '-0.02em' }}
+              className="font-grotesk font-black uppercase text-white leading-[0.9] border-l-8 border-neon pl-6"
+              style={{ fontSize: 'clamp(3rem, 8vw, 6.5rem)', letterSpacing: '-0.04em' }}
             >
-              SELECTED
-              <br />
-              WORK.
+              PROJECT <br />
+              <span className="text-neon/20 stroke-white">ARCHIVES.</span>
             </h2>
-          </div>
-          <span className="font-mono text-xs uppercase tracking-widest text-white opacity-40 hidden md:block">
-            2024 — PRESENT
-          </span>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="hidden lg:block text-right"
+          >
+            <span className="font-mono text-[10px] uppercase tracking-widest text-white/30 block mb-2">
+              LATEST UPDATE: 21 MAR 2026
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-widest text-white/30 block">
+              STATUS: [ALL SYSTEMS NOMINAL]
+            </span>
+          </motion.div>
         </div>
 
         {/* Project Cards Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid lg:grid-cols-2 gap-10 mb-10"
+        >
           {projects.map((project) => (
-            <div
+            <motion.div
               key={project.id}
-              className="port-card border-4 border-white relative overflow-hidden cursor-pointer group"
-              style={{ aspectRatio: '4/3' }}
+              variants={projectVariants}
+              className="port-card group relative overflow-hidden border-4 border-white/10 hover:border-white transition-all duration-700 bg-[#0a0a0a]"
+              style={{ aspectRatio: '16/10' }}
             >
               {/* SVG background */}
-              <div className="port-img absolute inset-0 w-full h-full">
+              <div className="port-img absolute inset-0 w-full h-full opacity-60 group-hover:opacity-100 transition-opacity duration-700">
                 {project.svgContent}
               </div>
 
-              {/* Gradient overlay */}
-              <div className="port-overlay absolute inset-0 z-10" />
+              {/* Better Gradient overlay */}
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
 
-              {/* Label */}
-              <div className="absolute bottom-0 left-0 z-20 p-5">
-                <span className="font-mono text-xs uppercase tracking-widest text-white opacity-60 block">
-                  PROJECT:
-                </span>
-                <h3 className="font-grotesk font-bold uppercase text-white text-2xl">
-                  {project.title}
-                </h3>
-                <span
-                  className="font-mono text-xs uppercase tracking-widest"
-                  style={{ color: project.accentColor }}
-                >
-                  {project.category} / {project.year}
-                </span>
+              {/* Project Info */}
+              <div className="absolute bottom-0 left-0 z-20 p-8 w-full">
+                <div className="flex items-end justify-between">
+                  <div>
+                    <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mb-3 block">
+                      {project.category} // {project.year}
+                    </span>
+                    <h3 className="font-grotesk font-black uppercase text-white text-4xl leading-none group-hover:text-neon transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                  </div>
+                  <div className="w-12 h-12 flex items-center justify-center border-2 border-white/20 text-white group-hover:bg-white group-hover:text-black transition-all duration-300">
+                    <ArrowUpRight size={24} />
+                  </div>
+                </div>
               </div>
 
-              {/* Arrow tag */}
-              <div className="absolute top-4 right-4 z-20">
-                <span className="font-mono text-xs uppercase tracking-widest px-2 py-1 border-2 border-white text-white opacity-70">
-                  →
-                </span>
-              </div>
-            </div>
+              {/* Accent corner line */}
+              <div 
+                className="absolute top-0 right-0 w-1 h-32 origin-top transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500" 
+                style={{ backgroundColor: project.accentColor }} 
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Archives CTA */}
-        <div
-          className="border-4 border-white p-10 md:p-16 text-center relative overflow-hidden grid-bg-dark"
-          style={{ background: '#0a0a0a' }}
+        {/* High-Impact Archives CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative group cursor-pointer border-4 border-white p-12 md:p-24 text-center overflow-hidden bg-[#050505] shadow-brutal-white hover:shadow-[12px_12px_0_rgba(255,255,255,1)] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-500"
         >
-          <h2
-            className="font-grotesk font-bold uppercase text-white relative z-10"
-            style={{ fontSize: 'clamp(2rem, 6vw, 5rem)', letterSpacing: '-0.02em', lineHeight: '0.95' }}
-          >
-            VIEW OUR
-            <br />
-            ARCHIVES
-          </h2>
-          <div className="mt-8 relative z-10">
+          {/* Animated Background Text */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none overflow-hidden whitespace-nowrap">
+            <span className="font-grotesk font-black text-[25vw] uppercase select-none animate-marquee">
+              FULL ARCHIVE — FULL ARCHIVE — FULL ARCHIVE — 
+            </span>
+          </div>
+
+          <div className="relative z-10 flex flex-col items-center">
+            <div className="w-16 h-16 border-2 border-white flex items-center justify-center mb-8 group-hover:bg-neon group-hover:border-neon group-hover:text-black transition-all duration-300 rotate-45">
+              <Archive size={32} className="-rotate-45" />
+            </div>
+            
+            <h2
+              className="font-grotesk font-black uppercase text-white mb-10"
+              style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)', letterSpacing: '-0.04em', lineHeight: '0.85' }}
+            >
+              WANT TO SEE <br />
+              <span className="text-neon group-hover:line-through transition-all">THE EVIDENCE?</span>
+            </h2>
+            
             <Link
               href="#"
-              className="btn-press inline-block font-grotesk font-bold uppercase text-sm px-10 py-4 bg-white text-black border-4 border-white shadow-brutal-white hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_#fff] transition-all duration-200"
-              style={{ letterSpacing: '0.12em' }}
+              className="group inline-flex items-center gap-4 bg-white text-black px-12 py-6 font-grotesk font-black text-lg uppercase tracking-widest transition-all duration-300 hover:bg-neon"
             >
-              EXPLORE ALL WORK →
+              EXPLORE FULL ARCHIVE
+              <ArrowUpRight size={24} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
             </Link>
           </div>
-        </div>
-
+        </motion.div>
       </div>
+
+      <style jsx>{`
+        .stroke-white {
+          -webkit-text-stroke: 1.5px #fff;
+          text-stroke: 1.5px #fff;
+        }
+      `}</style>
     </section>
   )
 }

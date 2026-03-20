@@ -1,6 +1,9 @@
+'use client'
+
 import Link from 'next/link'
-import { Star, TrendingUp, Video } from 'lucide-react'
+import { Star, TrendingUp, Video, ArrowUpRight } from 'lucide-react'
 import { ReactNode } from 'react'
+import { motion } from 'framer-motion'
 
 interface ServiceCard {
   id: string
@@ -10,126 +13,163 @@ interface ServiceCard {
   iconColor: string
   title: string
   items: string[]
+  description: string
 }
 
 const services: ServiceCard[] = [
   {
     id: 'brand-identity',
     number: '01',
-    icon: <Star size={22} strokeWidth={2.5} />,
+    icon: <Star size={24} strokeWidth={2} />,
     iconBg: '#2ff801',
-    iconColor: '#000',
+    iconColor: '#050505',
     title: 'BRAND IDENTITY',
-    items: ['LOGO DESIGN', 'VOICE & TONE', 'BRAND GUIDES'],
+    description: 'WE DON\'T JUST MAKE LOGOS. WE BUILD ARCHETYPES THAT COMMAND AUTHORITY.',
+    items: ['VISUAL ARCHITECTURE', 'CULTURAL POSITIONING', 'VERBAL STRATEGY'],
   },
   {
     id: 'growth-hacking',
     number: '02',
-    icon: <TrendingUp size={22} strokeWidth={2.5} />,
+    icon: <TrendingUp size={24} strokeWidth={2} />,
     iconBg: '#eaea00',
-    iconColor: '#000',
+    iconColor: '#050505',
     title: 'GROWTH HACKING',
-    items: ['ACQUISITION', 'CONVERSION', 'DATA MINING'],
+    description: 'DATA-DRIVEN AGGRESSION TO CAPTURE MARKET SHARE AT UNPRECEDENTED SPEEDS.',
+    items: ['ACQUISITION LOOPS', 'CONVERSION OPTIMIZATION', 'RETENTION SYSTEMS'],
   },
   {
     id: 'content-creation',
     number: '03',
-    icon: <Video size={22} strokeWidth={2.5} />,
-    iconBg: '#000',
+    icon: <Video size={24} strokeWidth={2} />,
+    iconBg: '#050505',
     iconColor: '#2ff801',
     title: 'CONTENT CREATION',
-    items: ['VIDEO PRODUCTION', '3D MOTION', 'COPYWRITING'],
+    description: 'HIGH-VOLTAGE ASSETS DESIGNED TO STOP THE SCROLL AND START THE OBSESSION.',
+    items: ['3D MOTION GRAPHICS', 'ADS THAT CONVERT', 'CINEMATIC BRANDING'],
   },
 ]
 
 export default function Services() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  }
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut" as any,
+      },
+    },
+  }
+
   return (
-    <section id="services" className="py-24 px-6 border-b-4 border-black bg-light">
+    <section id="services" className="py-32 px-6 border-b-6 border-black bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* ── Section Header ── */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16 items-end">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-widest opacity-50 mb-4">
-              // 001 — SERVICES
+        <div className="grid lg:grid-cols-2 gap-16 mb-24 items-end">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] mb-6 text-black/40">
+              // CORE CAPABILITIES
             </p>
             <h2
-              className="font-grotesk font-bold uppercase leading-none"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', letterSpacing: '-0.02em' }}
+              className="font-grotesk font-black uppercase leading-[0.9]"
+              style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', letterSpacing: '-0.04em' }}
             >
-              WHAT WE DO
-              <br />
-              <span
-                className="border-4 border-black px-2 inline-block"
-                style={{ background: 'var(--acid)' }}
-              >
-                BEST.
-              </span>
+              WHAT WE DO <br />
+              <span className="text-neon bg-black px-4 inline-block transform -rotate-1">BEST.</span>
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="md:text-right">
-            <p className="font-work text-base leading-relaxed opacity-75 max-w-sm md:ml-auto">
-              GENERIC STRATEGIES ARE FOR GENERIC COMPANIES. WE CREATE HIGH-VOLTAGE BRAND WEAPONS
-              THAT FORCE THE MARKET TO PAY ATTENTION — OR GET LEFT BEHIND.
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:text-right"
+          >
+            <p className="font-work text-lg leading-relaxed text-black/70 max-w-md lg:ml-auto">
+              GENERIC STRATEGIES ARE EXTINCT. WE ENGINEER HIGH-VOLTAGE BRAND WEAPONS
+              THAT FORCE THE MARKET TO PAY ATTENTION OR GET LEFT BEHIND.
             </p>
-            <Link
-              href="#contact"
-              className="inline-block mt-6 font-mono text-xs uppercase tracking-widest border-b-2 border-black hover:opacity-60 transition-opacity"
-            >
-              SEE ALL SERVICES →
-            </Link>
-          </div>
+          </motion.div>
         </div>
 
-        {/* ── Cards ── */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {services.map((svc, idx) => (
-            <div
+        {/* ── Service Cards ── */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid md:grid-cols-3 gap-8"
+        >
+          {services.map((svc) => (
+            <motion.div
               key={svc.id}
-              className="bg-white border-4 border-black shadow-brutal p-8 flex flex-col gap-6 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-xl transition-all duration-200"
-              style={idx === 1 ? { marginTop: '20px' } : undefined}
+              variants={cardVariants}
+              className="group relative flex flex-col bg-light border-4 border-black p-10 hover:bg-black transition-all duration-500 overflow-hidden"
             >
-              {/* Card top row */}
-              <div className="flex items-start justify-between">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-black opacity-0 group-hover:opacity-5 transition-opacity pointer-events-none" />
+              
+              {/* Card Header */}
+              <div className="flex justify-between items-start mb-12">
                 <div
-                  className="w-11 h-11 flex items-center justify-center border-2 border-black flex-shrink-0"
+                  className="w-14 h-14 flex items-center justify-center border-3 border-black group-hover:border-white transition-colors"
                   style={{ background: svc.iconBg, color: svc.iconColor }}
                 >
                   {svc.icon}
                 </div>
-                <span className="font-mono text-xs opacity-40">{svc.number}</span>
+                <span className="font-mono text-xs font-bold text-black/30 group-hover:text-white/30 transition-colors">
+                  #{svc.number}
+                </span>
               </div>
 
-              {/* Card body */}
-              <div>
-                <h3
-                  className="font-grotesk font-bold uppercase text-xl mb-4"
-                  style={{ letterSpacing: '0.04em' }}
-                >
+              {/* Card Content */}
+              <div className="relative z-10">
+                <h3 className="font-grotesk font-black text-2xl uppercase tracking-tight text-black group-hover:text-white mb-6 transition-colors">
                   {svc.title}
                 </h3>
-                <ul className="flex flex-col gap-2">
+                <p className="font-work text-sm leading-relaxed text-black/80 group-hover:text-white/80 mb-8 transition-colors">
+                  {svc.description}
+                </p>
+                
+                <ul className="space-y-3">
                   {svc.items.map((item) => (
-                    <li key={item} className="flex items-center gap-2 font-work text-sm opacity-70">
-                      <span className="w-1.5 h-1.5 bg-black inline-block flex-shrink-0" />
+                    <li key={item} className="flex items-center gap-3 font-mono text-[10px] font-bold text-black/60 group-hover:text-white/60 uppercase tracking-widest transition-colors">
+                      <span className="w-2 h-0.5 bg-neon" />
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Card footer */}
-              <div className="mt-auto pt-4 border-t-2 border-black">
+              {/* Hover Trigger */}
+              <div className="mt-12 pt-8 border-t border-black/10 group-hover:border-white/10 flex items-center justify-between transition-colors">
                 <Link
                   href="#contact"
-                  className="font-mono text-xs uppercase tracking-widest hover:opacity-60 transition-opacity"
+                  className="font-grotesk font-black text-sm uppercase tracking-widest text-black group-hover:text-neon transition-colors"
                 >
-                  INQUIRE →
+                  ACQUIRE →
                 </Link>
+                <ArrowUpRight className="text-black group-hover:text-neon group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )
