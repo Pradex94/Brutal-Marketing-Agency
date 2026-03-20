@@ -84,7 +84,7 @@ export default function Services() {
             transition={{ duration: 0.8 }}
           >
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] mb-6 text-black/40">
-              // CORE CAPABILITIES
+              {"// CORE CAPABILITIES"}
             </p>
             <h2
               className="font-grotesk font-black uppercase leading-[0.9]"

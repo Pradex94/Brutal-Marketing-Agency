@@ -43,7 +43,7 @@ export default function Contact() {
           <div className="lg:col-span-5">
             <motion.div variants={itemVariants}>
               <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] mb-6 text-black/40">
-                // ACQUISITION / INTAKE
+                {"// ACQUISITION / INTAKE"}
               </p>
               <h2
                 className="font-grotesk font-black uppercase leading-[0.9] mb-10"
@@ -54,7 +54,7 @@ export default function Contact() {
               </h2>
               <p className="font-work text-lg text-black/70 mb-12 max-w-sm">
                 WE ONLY WORK WITH CLIENTS WHO ARE READY FOR RADICAL GROWTH. 
-                IF YOU'RE LOOKING FOR "SAFE", LOOK ELSEWHERE.
+                IF YOU&apos;RE LOOKING FOR &quot;SAFE&quot;, LOOK ELSEWHERE.
               </p>
             </motion.div>
 

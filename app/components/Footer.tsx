@@ -19,7 +19,7 @@ export default function Footer() {
               BRUTAL<span className="text-neon group-hover:rotate-12 transition-transform duration-300 inline-block">.</span>AGENCY
             </Link>
             <p className="font-work text-lg text-white/50 max-w-md leading-relaxed">
-              WE DON'T DO QUIET. WE DON'T DO SAFE. WE BUILD DIGITAL WEAPONS FOR THE BOLD.
+              WE DON&apos;T DO QUIET. WE DON&apos;T DO SAFE. WE BUILD DIGITAL WEAPONS FOR THE BOLD.
               JOIN THE REVOLUTION OR WATCH FROM THE SIDELINES.
             </p>
           </div>
@@ -27,7 +27,7 @@ export default function Footer() {
           {/* Quick Links */}
           <div className="md:col-span-3">
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] mb-8 text-white/30">
-              // NAVIGATION
+              {"// NAVIGATION"}
             </p>
             <ul className="space-y-4">
               {['WORK', 'SERVICES', 'ABOUT', 'LABS', 'CONTACT'].map((item) => (
@@ -46,7 +46,7 @@ export default function Footer() {
           {/* Social / Extra */}
           <div className="md:col-span-3">
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] mb-8 text-white/30">
-              // PLUGINS
+              {"// PLUGINS"}
             </p>
             <ul className="space-y-4">
               {['INSTAGRAM', 'TWITTER', 'LINKEDIN', 'BEHANCE', 'GITHUB'].map((item) => (

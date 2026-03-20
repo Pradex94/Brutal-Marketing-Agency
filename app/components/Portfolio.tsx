@@ -124,7 +124,7 @@ export default function Portfolio() {
             transition={{ duration: 0.8 }}
           >
             <p className="font-mono text-[10px] font-bold uppercase tracking-[0.4em] mb-6 text-neon opacity-70">
-              // SELECTED CASE STUDIES
+              {"// SELECTED CASE STUDIES"}
             </p>
             <h2
               className="font-grotesk font-black uppercase text-white leading-[0.9] border-l-8 border-neon pl-6"
@@ -178,7 +178,7 @@ export default function Portfolio() {
                 <div className="flex items-end justify-between">
                   <div>
                     <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mb-3 block">
-                      {project.category} // {project.year}
+                      {project.category} {"//"} {project.year}
                     </span>
                     <h3 className="font-grotesk font-black uppercase text-white text-4xl leading-none group-hover:text-neon transition-colors duration-300">
                       {project.title}

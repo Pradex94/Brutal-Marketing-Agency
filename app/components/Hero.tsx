@@ -60,7 +60,7 @@ export default function Hero() {
             {/* Tag */}
             <motion.div variants={itemVariants} className="mb-10">
               <span className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] px-4 py-2 bg-black text-white inline-block">
-                // DIGITAL OUTLAWS — EST. 2024
+                {"// DIGITAL OUTLAWS — EST. 2024"}
               </span>
             </motion.div>
 
@@ -107,7 +107,7 @@ export default function Hero() {
             <div className="space-y-12">
               <div>
                 <p className="font-mono text-[10px] font-bold uppercase tracking-widest mb-4 text-black/40">
-                  // RECENT SUCCESS
+                  {"// RECENT SUCCESS"}
                 </p>
                 <div className="relative">
                   <span className="font-grotesk font-black text-6xl leading-none">+340%</span>
@@ -120,7 +120,7 @@ export default function Hero() {
 
               <div className="pt-8 border-t border-black/10">
                 <p className="font-mono text-[10px] font-bold uppercase tracking-widest mb-2 text-black/40">
-                  // CURRENT STATUS
+                  {"// CURRENT STATUS"}
                 </p>
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-neon rounded-full animate-pulse" />
